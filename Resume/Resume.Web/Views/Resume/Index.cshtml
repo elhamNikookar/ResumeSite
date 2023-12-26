@@ -1,0 +1,27 @@
+﻿@model Resume.Domain.ViewModels.Page.ResumePageViewModel
+
+
+<div class="section mt-0">
+    <h1 class="title title--h1 title__separate">رزومه</h1>
+</div>
+
+
+@if(Model.EducationsList != null && Model.EducationsList.Any())
+{
+    <partial name ="_EducationPartial" model = "@Model.EducationsList" />
+}
+
+
+
+@if(Model.ExperiencesList != null && Model.ExperiencesList.Any())
+{
+    <partial name ="_ExperiencePartial" model = "@Model.ExperiencesList" />
+}
+
+
+
+@if(Model.SkillsList != null && Model.SkillsList.Any())
+{
+    <partial name ="_SkillPartial" model = "@Model.SkillsList" />
+}
+

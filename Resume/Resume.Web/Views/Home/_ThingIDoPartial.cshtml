@@ -1,0 +1,52 @@
+﻿@model List<ThingIDoListViewModel>
+@using Resume.Domain.ViewModels.ThingIDo
+<div class="section">
+    <h2 class="title title--h2">کاری که انجام می دهم</h2>
+    <div class="row">
+
+        <!-- Case Item -->
+
+        @foreach (ThingIDoListViewModel item in Model)
+        {
+          <div class="col-12 col-lg-@item.ColumnLg case-item-wrap">
+            <div class="case-item">
+                <i class="@item.Icon thing-i-do-icon mb-3"></i>
+                <h3 class="title title--h3">@item.Title</h3>
+                <p class="case-item__caption">@item.Description</p>
+            </div>
+        </div>
+        }
+
+
+
+
+@*        <!-- Case Item -->
+        <div class="col-12 col-lg-6 case-item-wrap">
+            <div class="case-item">
+                <img class="case-item__icon" src="http://netgon.net/artstyles/v-card2/assets/icons/icon-dev.svg" alt="">
+                <h3 class="title title--h3">توسعه وب</h3>
+                <p class="case-item__caption">توسعه با کیفیت بالا سایت ها در سطح حرفه ای.</p>
+            </div>
+        </div>
+
+        <!-- Case Item -->
+        <div class="col-12 col-lg-6 case-item-wrap">
+            <div class="case-item">
+                <img class="case-item__icon" src="http://netgon.net/artstyles/v-card2/assets/icons/icon-app.svg" alt="">
+                <h3 class="title title--h3">برنامه های تلفن همراه</h3>
+                <p class="case-item__caption">توسعه حرفه ای برنامه های iOS و Android.</p>
+            </div>
+        </div>
+
+        <!-- Case Item -->
+        <div class="col-12 col-lg-6 case-item-wrap">
+            <div class="case-item">
+                <img class="case-item__icon" src="http://netgon.net/artstyles/v-card2/assets/icons/icon-photo.svg" alt="">
+                <h3 class="title title--h3">عکاسی</h3>
+                <p class="case-item__caption">من عکس هایی با کیفیت بالا از هر گروه را در سطح حرفه ای می سازم.</p>
+            </div>
+        </div>*@
+
+
+    </div>
+</div>

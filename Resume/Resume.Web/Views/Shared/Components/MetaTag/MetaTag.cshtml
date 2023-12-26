@@ -1,0 +1,30 @@
+﻿@using Resume.Domain.ViewModels.MetaTagSeo
+@using Resume.Application.StaticTools
+@model MetaTagSeoViewModel
+
+
+<meta charset="UTF-8">
+<meta name="googlebot" content="index,follow">
+<meta name="robots" content="noodp,noydir">
+<meta http-equiv="X-UA-Compatible" content="IE-edge,chrome=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+@*---------------------------------------------------------------------------------*@
+
+<meta name="keywords" content="@Model.Keywords" />
+<meta name="description" content="@Model.Description" />
+<meta name="author" content="@Model.Author" />
+<meta http-equiv="refresh" content="@Model.RefreshTime*24*60*60" />
+
+<meta property="og:title" content="@Model.OgTitle" />
+<meta property="og:description" content="@Model.OgDescription">
+<meta property="og:image" content="@Model.OgImage">
+<meta property="og:url" content="@Model.OgUrl">
+<meta property="og:type" content="@Model.OgType" />
+<meta property="og:locale" content="@Model.OgLocale" />
+
+<meta property="twitter:url" content="@Model.TwitterUrl">
+<meta property="twitter:title" content="@Model.TwitterTitle">
+<meta property="twitter:description" content="@Model.TwitterDescription">
+@*<meta property="twitter:image" content="">*@

@@ -1,0 +1,198 @@
+﻿@model Resume.Domain.ViewModels.MetaTagSeo.CreateOrEditMetaTagSeoViewModel
+
+@{
+    Layout = "";
+    bool isCreate = Model.ID == 0 ? true : false;
+}
+
+<form id="MetaTagSeoForm" asp-area="Admin" asp-controller="MetaTagSeo" asp-action="SubmitMetaTagSeoFormModal"
+      data-ajax="true" data-ajax-begin="StartLoading()" data-ajax-success="MetaTagSeoFormSubmited">
+
+    <div class="modal-header">
+        <h5 class="modal-title">ویرایش</h5>
+        <button type="button" class="close" data-dismiss="modal">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+
+    <div class="modal-body">
+
+        <div class="row">
+            <div class="col-12">
+
+                @if (!isCreate)
+                {
+                    <input type="hidden" asp-for="ID" />
+                }
+
+                <div class="form-group">
+                    <label asp-for="Keywords"></label>
+                    <div class="controls">
+                        <input type="text" asp-for="Keywords" class="form-control">
+                    </div>
+                    <span asp-validation-for="Keywords" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <div class="controls">
+                        <input type="text" asp-for="Description" class="form-control">
+                    </div>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="Author"></label>
+                    <div class="controls">
+                        <input type="text" asp-for="Author" class="form-control">
+                    </div>
+                    <span asp-validation-for="Author" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="RefreshTime"></label>
+                    <div class="controls">
+                        <input type="number" asp-for="RefreshTime" class="form-control">
+                    </div>
+                    <span asp-validation-for="RefreshTime" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="OgDescription"></label>
+                    <div class="controls">
+                        <input type="text" asp-for="OgDescription" class="form-control">
+                    </div>
+                    <span asp-validation-for="OgDescription" class="text-danger"></span>
+                </div>
+
+
+                 <div class="form-group">
+                    <label asp-for="OgTitle"></label>
+                    <div class="controls">
+                        <input type="text" asp-for="OgTitle" class="form-control">
+                    </div>
+                    <span asp-validation-for="OgTitle" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="OgLocale"></label>
+                    <div class="controls">
+                        <input type="text" asp-for="OgLocale" class="form-control">
+                    </div>
+                    <span asp-validation-for="OgLocale" class="text-danger"></span>
+                </div>
+
+                 <div class="form-group">
+                    <label asp-for="OgType"></label>
+                    <div class="controls">
+                        <input type="text" asp-for="OgType" class="form-control">
+                    </div>
+                    <span asp-validation-for="OgType" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="OgUrl"></label>
+                    <div class="controls">
+                        <input type="text" asp-for="OgUrl" class="form-control">
+                    </div>
+                    <span asp-validation-for="OgUrl" class="text-danger"></span>
+                </div>
+
+                
+                <div class="form-group">
+                    <label for="image-upload"></label>
+                    <div class="controls">
+                        <input type="file" name="image-upload" id="image-upload" class="form-control" />
+                    </div>
+                    <span asp-validation-for="OgImage" class="text-danger"></span>
+                </div>
+
+
+                 <div class="form-group">
+                    <label asp-for="TwitterDescription"></label>
+                    <div class="controls">
+                        <input type="text" asp-for="TwitterDescription" class="form-control">
+                    </div>
+                    <span asp-validation-for="TwitterDescription" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="TwitterTitle"></label>
+                    <div class="controls">
+                        <input type="text" asp-for="TwitterTitle" class="form-control">
+                    </div>
+                    <span asp-validation-for="TwitterTitle" class="text-danger"></span>
+
+
+                </div> <div class="form-group">
+                    <label asp-for="TwitterUrl"></label>
+                    <div class="controls">
+                        <input type="text" asp-for="TwitterUrl" class="form-control">
+                    </div>
+                    <span asp-validation-for="TwitterUrl" class="text-danger"></span>
+                </div>
+                
+
+                <div>
+                    <button type="submit" class="btn btn-bold btn-pure float-right btn-warning">ویرایش</button>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+</form>
+
+
+<script>
+    $("#image-upload").change(function () {
+
+        const imageFile = $('input#image-upload')[0].files[0]
+
+        if (imageFile.name.split('.').pop() === "png" || imageFile.name.split('.').pop() === "jpeg" || imageFile.name.split('.').pop() === "jpg") {
+
+            const fd = new FormData();
+            fd.append("file", imageFile);
+
+            $.ajax({
+                type: "Post",
+                url: "/Admin/MetaTagSeo/UploadMetaTagSeoImageAjax",
+                enctype: "multipart/form-data",
+                data: fd,
+                beforeSend: function () {
+                    ShowMessage("اعلان", "لطفا تا انتهای بارگذاری صبر کنید ...", "info")
+                },
+                success: function (response) {
+                    if (response.status === "Success") {
+                        ShowMessage("اعلان", "فایل مورد نظر با موفقیت بارگذاری شد .", "success");
+                        $("#Avatar").val(response.imageName);
+                    }
+                    else if (response.status === "Error") {
+                        ShowMessage("خطا", "فرمت فایل باید jpeg ، jpeg یا png باشد", "error")
+                    }
+                },
+                error: function () {
+                    ShowMessage("خطا", "در بارگذاری فایل خطایی رخ داده است .", "error")
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            })
+        }
+        else {
+            ShowMessage("خطا", "فرمت فایل باید jpeg ، jpeg یا png باشد", "error")
+        }
+
+
+    });
+</script>
